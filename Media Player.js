@@ -62,7 +62,7 @@ mh = new Array();
 mv = new Array();
 mi = new Array();
 mt = new Array();
-mi = ["Home","Images","Audio","Videos","Settings"];
+mi = ["Home","Scan","Audio","Videos","Settings"];
 mi2 = ["home","image","music_note","video_library","settings"];
 //mi = ["Home","","","","Settings"];
 //mi2 = ["home","","","","settings"];
@@ -301,11 +301,11 @@ function CreateActionBar()
 {
     //Create horizontal layout for top bar.
     layHoriz = app.CreateLayout( "Linear", "Horizontal,FillX,Left" );
-    layHoriz.SetBackGradient("#692063D2","#3174E3", "#4285F4");
+    layHoriz.SetBackGradient("#2063D2","#3174E3", "#4285F4");
     layMain.AddChild( layHoriz );
     
     //Create menu (hamburger) icon .
-    txtMenu = app.CreateText( "[fa-bars]", -1,-1, "FontAwesome" );
+    txtMenu = app.CreateText( "[fa-home]", -1,-1, "FontAwesome" );
     txtMenu.SetPadding( 12,10,12,10, "dip" );
     txtMenu.SetTextSize( 28 );
     txtMenu.SetTextColor( "#ffffff" );
@@ -378,12 +378,12 @@ function CreateDrawer()
 	layDrawer.AddChild( layMenu );
 	
     //Add a list to menu layout (with the menu style option).
-    var listItems = "Home::[fa-home],About::[fa-question-circle],Settings::[fa-gears],New File::[fa-plus]";
+    var listItems = "Home::[fa-home],Scan::[fa-qrcode],About::[fa-question-circle],Settings::[fa-gears],New File::[fa-plus]";
     lstMenuMain = app.CreateList( listItems, drawerWidth, -1, "Menu,Expand" );
     lstMenuMain.SetColumnWidths( -1, 0.35, 0.18 );
     lstMenuMain.SelectItemByIndex( 0, true );
     lstMenuMain.SetItemByIndex( 0, "Home" );
-		lstMenuMain.SetIconSize( 32, "dip" );
+		lstMenuMain.SetIconSize( 28, "dip" );
     lstMenuMain.SetOnTouch( lstMenu_OnTouch );
     layMenu.AddChild( lstMenuMain );
     curMenuList = lstMenuMain;
@@ -629,12 +629,11 @@ if (webserver1 == null) {webserver1 = app.CreateWebServer( 6969, "ListDir" );}el
 webserver1.SetFolder( "/storage/emulated/0/" + name );
 webserver1.Start();
 	f = "" + app.ListFolder( "/storage/emulated/0/" + name, ".jpg", 0);
-  Picasso.get()
- 	.fit()
+/*  Picasso.get().fit()
    .load( "http://" + app.GetIPAddress() + ":" + "6969" + "/" + f.split(",")[2]+"".replace(" ", "%20").replace(" ", "%20").replace(" ","%20").replace(" ","%20"))
 	 .transform( "circle" )
    .save( appPathImg + "/" + name + ".png", img_Saved );
-   app.Wait( 3 );
+   app.Wait( 3 );*/
    /*Picasso.get()
  	.fit()
    .load( "http://" + app.GetIPAddress() + ":" + "6969" + "/" + f.split(",")[3].replace(" ", "%20").replace(" ", "%20").replace(" ","%20").replace(" ","%20"))
