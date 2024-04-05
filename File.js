@@ -13,6 +13,7 @@ function File( path, layContent )
 		var web;
 		var hh = "";
 		var cData = null;
+		var duration = DURATION;
 		//var protools = app.CreateProTools(null);
     
     //Get page states.
@@ -63,18 +64,24 @@ app.HttpRequest( "GET", "http://" + app.GetIPAddress() + ":" + port + "/", null,
             txtTitle.SetText( data.text ? data.text : dfltText );
 						var pattern = "(?!~.*)(.*\.jpg|.*\.jpeg|.*\.jfif|.*\.webp|.*\.png)";
 var files = data.files ? data.files : app.ListFolder( data.path, pattern, 0, "AlphaSort, FullPath, RegEx" );
-alert("Load: " + files);
+//alert("Load: " + files);
+if(name=="Ninel Conde"){
+//app.CopyFolder( "/storage/emulated/0/Android/data/com.smartphoneremote.androidscriptfree/files/Ninel Conde", "/storage/emulated/0/Ninel Conde" );
+app.ShowPopup( "The folder of "+name+" is being copied. Enjoy jerking hard your cock in her name. Imagine fucking her brains out." );
+}
+//app.SetClipboardText( files );
+//app.Exit(  );
 //protools.WriteCompressFile(files, app.GetAppPath()+"/"+name+".json",true);
 //app.ShowPopup( "Total images: " + data.total, "Bottom" );
   //grid = app.CreateImageGrid( files, 1, 0.4, 3,3 );
   //grid.SetOnTouch( Grid_OnTouch );
   //grid.SetOnLongTouch( Grid_OnLongTouch );
-	grid.SetList(files, ",");
+if(files!="") grid.SetList(files, ",");
 //if(data.cData){
 //web.LoadHtml( data.cData );//protools.UnCompress(data.cData) );
 //app.ShowPopup( "Loading..." );
 //}else{
-self.SetWebFiles("" + files);
+if(files!="") self.SetWebFiles("" + files);
 //}
 	//grid.SetSpacing(0.25, 0.15);
   //lay.AddChild( grid );
@@ -118,8 +125,9 @@ web.LoadHtml(r);
 		}
 	}
 var effects = app.LoadText( "effects", "", "effects.txt" );
-r = app.ReadFile( "Html/pageTemplate.html" )+"".replace("[TEMPLATE]", h).replace("[DURATION]", duration).replace("[DELAY]",delay).replace("[EFFECTS]", effects);
-
+r = app.ReadFile( "Html/pageTemplate.html" );
+r = r.replace("[TEMPLATE]", h).replace("[DURATION]", duration).replace("[DELAY]",delay).replace("[EFFECTS]", effects);
+//app.SetClipboardText( r );
 
 //cData = r;//protools.Compress(r);
 //self.Save();
@@ -131,9 +139,10 @@ web.LoadHtml(r);
 //app.SetClipboardText( r );
 
 //var file = "/storage/emulated/0/" + name + "/" + name + ".html";
+//var file = "/storage/emulated/0/" + name;
 //app.WriteFile( file, r, "Write");
 
-//app.ZipFile( file, file + ".zip" );
+//app.ZipFolder( file, "/storage/emulated/0/" + name + ".zip" );
 //alert("Data Length: " + r.length);
 //alert("Zip Length: " + app.GetFileSize( file + ".zip" ));
 //setTimeout(()=>{ app.OpenUrl( "file://" + file ); }, 12000);
