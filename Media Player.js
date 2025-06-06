@@ -3,8 +3,8 @@ app.LoadPlugin( "Support" );
 app.LoadPlugin( "ImageGrid" );
 app.LoadPlugin( "Jimp" );
 app.LoadPlugin( "Utils" );
-app.LoadPlugin( "UIExtras" );
 app.LoadPlugin( "Picasso" );
+app.LoadPlugin( "UIExtras" );
 //app.LoadPlugin( "ProTools" );
 //app.LoadPlugin('DroidScriptUIKit');
 
@@ -17,7 +17,7 @@ app.Script( "Utils.js" );
 app.Script( "Folders.js" );
 var counter = 0;
 //Init some global variables.
-var appPath = "/sdcard/PSP1";//storage/emulated/0/" + app.GetAppName() + " (v) 1.0";
+var appPath = "storage/emulated/0/" + app.GetAppName() + " (v) 1.0";
 var curMenu = "Home";
 var currentPath;
 var curPage = null;
@@ -54,7 +54,7 @@ function CreateMenuBar()
     layHoriz2 = app.CreateLayout( "Linear", "Horizontal,FillX,Left" );
     layHoriz2.SetBackGradient( color.ORANGE_LIGHT_3, color.ORANGE_DARK_2, color.ORANGE_ACCENT_2 );
     layMain.AddChild( layHoriz2 );
-		layHoriz2.SetSize( 1.0, 0.0981 );
+		layHoriz2.SetSize( 1.0, 0.09481 );
 //layHoriz2.SetCornerRadius( 5 );
 //layHoriz2.SetElevation( 5 );
 
@@ -378,7 +378,7 @@ function CreateDrawer()
 	layDrawer.AddChild( layMenu );
 	
     //Add a list to menu layout (with the menu style option).
-    var listItems = "Home::[fa-home],Scan::[fa-qrcode],About::[fa-question-circle],Settings::[fa-gears],New File::[fa-plus]";
+    var listItems = "Home::[fa-home],Scan::[fa-qrcode],About::[fa-question-circle],Settings::[fa-gears],New Gallery::[fa-plus]";
     lstMenuMain = app.CreateList( listItems, drawerWidth, -1, "Menu,Expand" );
     lstMenuMain.SetColumnWidths( -1, 0.35, 0.18 );
     lstMenuMain.SelectItemByIndex( 0, true );
@@ -415,11 +415,12 @@ function lstMenu_OnTouch( title, body, type, index )
 {
     curMenuList = this;
     
-    //Handle new file creation.
-    if( title=="New File" ) { 
+    //Handle New Gallery creation.
+    if( title=="New Gallery" ) { 
         //app.ShowTextDialog( "File Name", "", OnAdd );
-				var dir = "/sdcard";
-				app.ChooseFolder(1,0.8,OnSelect,dir);
+				var dir = "/storage/emulated/0";
+				OnSelect(dir+"/"+prompt("Enter the name:","Rachel Hunter"));
+				//app.ChooseFolder(1,0.8,OnSelect,dir);
         return;
     }
     else if( title=="About" ) {
@@ -511,7 +512,7 @@ function OnRename( name )
     }
 }
 
-//Called after user enters new file name.
+//Called after user enters New Gallery name.
 function OnAdd( name, type )
 {
 	//Check up name.
@@ -528,7 +529,7 @@ function OnAdd( name, type )
         app.MakeFolder( fldr );
         app.MakeFolder( fldr +"/Img" );
         
-        //Start new file and refresh list.
+        //Start New Gallery and refresh list.
         curMenuList = lstMenuFiles;
         ChangePage( file, name );
         file.Save();
@@ -538,7 +539,7 @@ function OnAdd( name, type )
 }
 
 function OnSelect(fol) {
-		app.Alert(fol);
+		//app.Alert(fol);
 	name = fol.split("/")[fol.split("/").length-1];
   var fldr = appPath+"/"+name;
     if( app.FolderExists( fldr ) ) {
@@ -548,7 +549,7 @@ function OnSelect(fol) {
         app.MakeFolder( fldr );
         app.MakeFolder( fldr +"/Img" );
         
-        //Start new file and refresh list.
+        //Start New Gallery and refresh list.
         curMenuList = lstMenuFiles;
 				currentPath = fol;
         ChangePage( file, name );
